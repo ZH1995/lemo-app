@@ -1,1 +1,1 @@
-angular.module('lemo.services', ['message-service', 'messageDetail-service']);
+angular.module('lemo.services', ['message-service', 'messageDetail-service', 'personal-service']);
