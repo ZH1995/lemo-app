@@ -94,6 +94,18 @@ angular.module('lemo', ['ionic', 'lemo.controllers', 'lemo.services', 'lemo.filt
       url:'/login',
       templateUrl:'templates/login.html',
       controller:'LoginCtrl'
+  })
+
+  .state('register',{
+      url:'/register',
+      templateUrl:'templates/register.html',
+      controller:'RegisterCtrl'
+  })
+
+  .state('modifyPassword',{
+      url:'/modifyPassword',
+      templateUrl:'templates/modifyPassword.html',
+      controller:'ModifyPasswordCtrl'
   });
 
   // if none of the above states are matched, use this as the fallback
