@@ -1,5 +1,19 @@
 <ion-view title="视频">
+	<ion-content>
 
-	// 嵌入腾讯视频方法，详见：http://www.pc6.com/infoview/Article_87821.html
-    <p style="text-align: center"><iframe class="video_iframe" style="z-index:1;" src="http://v.qq.com/iframe/player.html?vid=k03249wonni&amp;width=400&amp;height=200&amp;auto=0" allowfullscreen="" frameborder="0" height="200" width="400"></iframe></p>
+		<div class="list">
+			<div ng-repeat="media in mediaList">
+		<!-- 嵌入腾讯视频方法，详见：http://www.pc6.com/infoview/Article_87821.html -->
+		    	
+				<div class="item">
+		    		<p style="text-align: center">{{media.mediaTitle}}</p>  
+					<iframe ng-src="{{media.url}}" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" width="100%" frameborder="0" height="200px"></iframe>
+				</div>
+				<!--
+		    	<iframe class="video_iframe" style="z-index:1;" ng-src="{{media.url}}" allowfullscreen="" frameborder="0" height="200" width="400"></iframe>
+		    	-->
+		    
+		    </div>
+		</div>
+	</ion-content>
 </ion-view>
