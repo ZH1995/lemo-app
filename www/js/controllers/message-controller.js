@@ -1,8 +1,9 @@
 angular.module('message-controller',[])
-.controller('MessageCtrl', ['$scope', '$timeout', '$ionicLoading', 'MessageService', function($scope, $timeout, $ionicLoading, MessageService){
+.controller('MessageCtrl', ['$scope', '$timeout', '$ionicLoading', '$sce', 'MessageService', function($scope, $timeout, $ionicLoading, $sce, MessageService){
 	$scope.hotMessageList    = MessageService.getHotMessageList();
 	$scope.normalMessageList = MessageService.getNormalMessageList();
 	
+
 	/*
 	$scope.items = [];
 	$scope.pagination = {

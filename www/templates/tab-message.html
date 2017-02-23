@@ -4,7 +4,7 @@
     	<ion-slide-box auto-play="true"   slide-interval=2000  does-continue="true" delegate-handle="slideimgs" class="slidebox"  on-slide-changed="slideHasChanged($index)" style="margin-top: -1px;">  
             <ion-slide ng-repeat="hotMessageInfo in hotMessageList" >  
                 <ion-item class="box banner" href="#/tab/message/{{hotMessageInfo.messageId}}">
-                    <img ng-src="{{hotMessageInfo.messagePic}}"></img>
+                    <img ng-src="{{hotMessageInfo.messagePic}}" style="width: 100%; height: 230px"></img>
                 </ion-item>
             </ion-slide>  
         </ion-slide-box>
