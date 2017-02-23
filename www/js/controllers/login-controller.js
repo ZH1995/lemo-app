@@ -6,7 +6,6 @@ angular.module('login-controller',[])
 	$scope.doLogin = function(){
 		LoginService.login(this.formUser);
 		$scope.showSuccessMesPopup("正在登录请稍后");
-        console.log(data);
         var user = JSON.stringify(data);
         sessionStorage.setItem("user",user);
       // TODO: 服务端还没写，所以这里先注释掉，默认输入合法即跳转
