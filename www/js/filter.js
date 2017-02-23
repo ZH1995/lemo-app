@@ -1,0 +1,1 @@
+angular.module('lemo.filters', ['login-filter']);
