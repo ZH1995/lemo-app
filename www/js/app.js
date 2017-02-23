@@ -61,7 +61,7 @@ angular.module('lemo', ['ionic', 'lemo.controllers', 'lemo.services'])
   })
 
   .state('tab.message-detail', {
-      url: '/message/:id',
+      url: '/message/:messageId',
       views: {
         'tab-message': {
           templateUrl: 'templates/message-detail.html',

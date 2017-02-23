@@ -1,5 +1,34 @@
 <ion-view title="首页">
     <ion-content>
-        <h1>这是首页</h1>
+
+    	<ion-slide-box auto-play="true"   slide-interval=2000  does-continue="true" delegate-handle="slideimgs" class="slidebox"  on-slide-changed="slideHasChanged($index)" style="margin-top: -1px;">  
+            <ion-slide ng-repeat="hotMessageInfo in hotMessageList" >  
+                <ion-item class="box banner" href="#/tab/message/{{hotMessageInfo.messageId}}">
+                    <img ng-src="{{hotMessageInfo.messagePic}}"></img>
+                </ion-item>
+            </ion-slide>  
+        </ion-slide-box>
+
+        <div class="list">
+            <a class="item item-thumbnail-right" ng-repeat="normalMessageInfo in normalMessageList" href="#/tab/message/{{normalMessageInfo.messageId}}">
+                <img ng-src="{{normalMessageInfo.messagePic}}"></img>
+                <p>{{normalMessageInfo.messageTitle}}</p>    
+            </a>
+        </div>
+
+        <!--
+        <div class="list">
+            <a class="item" ng-repeat="item in items" href="#/tab/main/{{item.CONTENTID}}">
+               <div style="font-weight: bolder">{{item.CONTENTTILTLE}}</div>
+                <div class="row" style="font-size: 10px;">
+                    <div class="col text-left">{{item.CONTENTAUTHOR}}</div>
+                    <div class="col text-right">{{item.CONTENTDATE.year+1900+"-"+item.CONTENTDATE.month+"-"+item.CONTENTDATE.date}}</div>
+                </div>
+            </a>
+        </div>
+        -->
+
+        <ion-infinite-scroll   on-infinite="loadMore();" spinner="android" distance="1%" immediate-check="true" ng-if="isHaveMoreData">
+        </ion-infinite-scroll>
     </ion-content>
 </ion-view>

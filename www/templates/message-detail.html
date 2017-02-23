@@ -1,5 +1,28 @@
 <ion-view title="文章">
     <ion-content>
-        <h1>这是文章页</h1>
+        <div class="padding">
+
+        	<img class="full-image" src="{{messageDetail.messagePic}}"></img>
+        	
+        	<div>
+        		<h3 class="text-center">{{messageDetail.messageTitle}}</h3>
+        	</div>
+
+        	<div class="item item-avatar">
+			    <img src="{{messageDetail.authorHeadImg}}" style="width:80px; height:80px"></img>
+			    <h2>{{messageDetail.authorName}}</h2>
+			    <p>{{messageDetail.messageCreateTime}}</p>
+			</div>
+
+			<div class="item item-body">
+			    
+				<p>{{messageDetail.messageContent}}</p>
+			    <p>
+			      <a href="#" class="subdued">{{messageDetail.goodNum}} Like</a>
+			      <a href="#" class="subdued">{{messageDetail.commentNum}} Comments</a>
+			    </p>
+			</div>
+
+        </div>
     </ion-content>
 </ion-view>
