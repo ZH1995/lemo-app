@@ -1,23 +1,48 @@
 angular.module('message-controller',[])
-.controller('MessageCtrl', ['$scope', '$timeout', '$ionicLoading', '$sce',
+.controller('MessageCtrl', ['$scope', '$timeout', '$ionicLoading', '$sce', '$ionicSlideBoxDelegate',
 			'MessageService', 'MessageHotspotService',
-			function($scope, $timeout, $ionicLoading, $sce, MessageService, MessageHotspotService){
+			function($scope, $timeout, $ionicLoading, $sce, $ionicSlideBoxDelegate, MessageService, MessageHotspotService){
 
-	MessageHotspotService.getHotspotList().success(function (obj) {
-	$scope.hotspotList = obj.data;
-	console.log(obj.data);
-	}).error(function (obj) {
-		alert("Network fail " + obj);
-	});
-
+	$scope.hotspotList = [];
 	$scope.items = [];
 	$scope.pagination = {
-		pageSize: 10,
+		pageSize: 7,
 		currentPage: 0
 	};
-	
+
+
+	$scope.getHotMessage = function() {
+		MessageHotspotService.getHotspotList().success(function (obj) {
+            $scope.hotspotList = obj.data;
+            console.log("getHotMessage");
+        }).error(function (obj) {
+            alert(obj);
+        }).finally(function(){
+        	$timeout(function(){
+				$ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
+				$ionicSlideBoxDelegate.$getByHandle('slideimgs').loop(true);
+			} , 500);
+		});
+    };
+
+	$scope.doRefresh = function () {
+		$scope.items = [];
+		$scope.pagination = {
+			pageSize: 7,
+			currentPage: 0
+		};
+		$scope.getHotMessage();
+		$scope.loadMore();
+    };
+
+	$scope.isFirstLoadHot = true;
 	$scope.isHaveMoreData = true;
 	$scope.loadMore = function() {
+		if ($scope.isFirstLoadHot == true) {
+			$scope.getHotMessage();
+			$scope.isFirstLoadHot = false;
+			console.log("loadMore");
+		}
 		MessageService.getNormalMessageList({
 			pageSize: $scope.pagination.pageSize,
 			currentPage: $scope.pagination.currentPage++
@@ -32,6 +57,7 @@ angular.module('message-controller',[])
 		.finally(function(){
 			$timeout(function(){
 				$scope.$broadcast("scroll.infiniteScrollComplete");
+				$scope.$broadcast('scroll.refreshComplete');
 			}, 2000);
 		});
 	};
