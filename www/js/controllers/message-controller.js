@@ -1,28 +1,33 @@
 angular.module('message-controller',[])
-.controller('MessageCtrl', ['$scope', '$timeout', '$ionicLoading', '$sce', 'MessageService', function($scope, $timeout, $ionicLoading, $sce, MessageService){
-	$scope.hotMessageList    = MessageService.getHotMessageList();
-	$scope.normalMessageList = MessageService.getNormalMessageList();
-	
+.controller('MessageCtrl', ['$scope', '$timeout', '$ionicLoading', '$sce',
+			'MessageService', 'MessageHotspotService',
+			function($scope, $timeout, $ionicLoading, $sce, MessageService, MessageHotspotService){
 
-	/*
+	MessageHotspotService.getHotspotList().success(function (obj) {
+	$scope.hotspotList = obj.data;
+	console.log(obj.data);
+	}).error(function (obj) {
+		alert("Network fail " + obj);
+	});
+
 	$scope.items = [];
 	$scope.pagination = {
 		pageSize: 10,
-		currentPage: 1
+		currentPage: 0
 	};
 	
 	$scope.isHaveMoreData = true;
 	$scope.loadMore = function() {
-		$data.findAll("message", {
-			pageSize: $scope.pageSize,
-			currentPage: $scope.pagination.currentPage ++
+		MessageService.getNormalMessageList({
+			pageSize: $scope.pagination.pageSize,
+			currentPage: $scope.pagination.currentPage++
 		})
-		.success(function(data){
-			if (data == null) {
-				$scope.isHaveMoreData = false;
-				return;
-			}
-			$scope.items = $scope.items.concat(data);
+		.success(function(obj){
+			if (obj.errno != 0 || obj.data.list.length == 0) {
+                $scope.isHaveMoreData = false;
+                return;
+            }
+			$scope.items = $scope.items.concat(obj.data.list);
 		})
 		.finally(function(){
 			$timeout(function(){
@@ -34,5 +39,5 @@ angular.module('message-controller',[])
 	$scope.$on("stateChangeSuccess", function(){
 		$scope.loadMore();
 	});
-	*/
+
 }]);

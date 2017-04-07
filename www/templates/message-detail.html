@@ -2,24 +2,26 @@
     <ion-content>
         <div class="padding">
 
-        	<img class="full-image" src="{{messageDetail.messagePic}}"></img>
+        	<img class="full-image" src="{{messageDetail.cover_pic}}"/>
         	
         	<div>
-        		<h3 class="text-center">{{messageDetail.messageTitle}}</h3>
+        		<h3 class="text-center">{{messageDetail.message_title}}</h3>
         	</div>
 
         	<div class="item item-avatar">
-			    <img src="{{messageDetail.authorHeadImg}}" style="width:80px; height:80px"></img>
-			    <h2>{{messageDetail.authorName}}</h2>
-			    <p>{{messageDetail.messageCreateTime}}</p>
+			    <img src="{{messageDetail.author_img}}" style="width:80px; height:80px"></img>
+			    <h2>{{messageDetail.author_name}}</h2>
+			    <p>{{messageDetail.create_time | UnixTimeFilter}}</p>
 			</div>
 
 			<div class="item item-body">
 			    
-				<p>{{messageDetail.messageContent}}</p>
+				<p>{{messageDetail.message_content}}</p>
 			    <p>
-			      <a href="#" class="subdued">{{messageDetail.goodNum}} Like</a>
-			      <a href="#" class="subdued">{{messageDetail.commentNum}} Comments</a>
+			      <a href="#" class="subdued">{{messageDetail.good_num}} Like</a>
+			      <!--
+			      <a href="#" class="subdued">{{messageDetail.comment_num}} Comments</a>
+			      -->
 			    </p>
 			</div>
 

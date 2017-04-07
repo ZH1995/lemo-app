@@ -4,23 +4,20 @@ angular.module('login-controller',[])
 	$scope.formUser = {};
 
 	$scope.doLogin = function(){
-		LoginService.login(this.formUser);
-		$scope.showSuccessMesPopup("正在登录请稍后");
-        var user = JSON.stringify(data);
-        sessionStorage.setItem("user",user);
-      // TODO: 服务端还没写，所以这里先注释掉，默认输入合法即跳转
-      /*
-        LoginService.login(this.formUser).success(function(data){
-            if (data == null) {
+        LoginService.login(this.formUser).success(function (obj) {
+            if (obj.errno != 0) {
                 $scope.showErrorMesPopup("手机号或密码错误");
-            } else {
-                $scope.showSuccessMesPopup("正在登录请稍后");
-                console.log(data);
-                var user = JSON.stringify(data);
-                sessionStorage.setItem("user",user);
+                return -1;
             }
-      });
-	*/
+            $scope.showSuccessMesPopup("正在登录请稍后");
+            var uid = obj.data.uid;
+            // TODO: 打算把用户ID存入Session
+            //var user = JSON.stringify(data);
+            //sessionStorage.setItem("user",user);
+            console.log(uid);
+        }).error(function (obj) {
+            $scope.showErrorMesPopup("网络错误，请保持网络畅通");
+        });
     };
 
 	$scope.showErrorMesPopup = function(title) {

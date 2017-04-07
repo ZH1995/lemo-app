@@ -1,1 +1,1 @@
-angular.module('lemo.filters', ['login-filter']);
+angular.module('lemo.filters', ['login-filter', 'unixTime-filter']);

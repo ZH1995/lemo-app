@@ -1,6 +1,6 @@
 <ion-view title="首页">
     <ion-content>
-
+        <!--
     	<ion-slide-box auto-play="true"   slide-interval=2000  does-continue="true" delegate-handle="slideimgs" class="slidebox"  on-slide-changed="slideHasChanged($index)" style="margin-top: -1px;">  
             <ion-slide ng-repeat="hotMessageInfo in hotMessageList" >  
                 <ion-item class="box banner" href="#/tab/message/{{hotMessageInfo.messageId}}">
@@ -8,21 +8,29 @@
                 </ion-item>
             </ion-slide>  
         </ion-slide-box>
+        -->
+
+        <ion-slide-box auto-play="true"   slide-interval=2000  does-continue="true" delegate-handle="slideimgs" class="slidebox"  on-slide-changed="slideHasChanged($index)" style="margin-top: -1px;">
+            <ion-slide ng-repeat="hotMessage in hotspotList" >
+                <ion-item class="box banner" href="#/tab/message/{{hotMessage.message_id}}">
+                    <img ng-src="{{hotMessage.cover_pic}}" style="width: 100%; height: 230px"/>
+                </ion-item>
+            </ion-slide>
+        </ion-slide-box>
 
         <div class="list">
-            <a class="item item-thumbnail-right" ng-repeat="normalMessageInfo in normalMessageList" href="#/tab/message/{{normalMessageInfo.messageId}}">
-                <img ng-src="{{normalMessageInfo.messagePic}}"></img>
-                <p>{{normalMessageInfo.messageTitle}}</p> 
+            <a class="item item-thumbnail-right" ng-repeat="item in items" href="#/tab/message/{{item.message_id}}">
+                <img ng-src="{{item.cover_pic}}"/>
+                <p>{{item.message_title}}</p>
             </a>
         </div>
-
         <!--
         <div class="list">
             <a class="item" ng-repeat="item in items" href="#/tab/main/{{item.CONTENTID}}">
                <div style="font-weight: bolder">{{item.CONTENTTILTLE}}</div>
                 <div class="row" style="font-size: 10px;">
                     <div class="col text-left">{{item.CONTENTAUTHOR}}</div>
-                    <div class="col text-right">{{item.CONTENTDATE.year+1900+"-"+item.CONTENTDATE.month+"-"+item.CONTENTDATE.date}}</div>
+                    <div class="col text-right">{{item.CONTENTDATE.year}}+1900+"-"+item.CONTENTDATE.month+"-"+item.CONTENTDATE.date}}</div>
                 </div>
             </a>
         </div>
