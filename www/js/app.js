@@ -66,6 +66,12 @@ angular.module('lemo', ['ionic', 'lemo.controllers', 'lemo.services', 'lemo.filt
       controller: 'MessageDetailCtrl'
     })
 
+  .state('commentList', {
+      url: '/commentList/:commentId',
+      templateUrl: 'templates/commentList.html',
+      controller: 'CommentListCtrl'
+    })
+
   .state('tab.media', {
       url: '/media',
       views: {
