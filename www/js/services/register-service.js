@@ -1,18 +1,17 @@
 angular.module('register-service', [])
 .factory('RegisterService', function($http){
-	
-	var userInfo = {
-		//messageId: 1000,
-		userName:     "夏天",
-		phoneNumber:  123456789,
-		userPassword: "nicaiciakna",
-	};
-	
 	return {
 		register: function(registerParams) {
-			//registerParams.phoneNumber
-			//registerParams.password
-			return userInfo;
+			var request_data = new Object();
+			request_data.username = registerParams.username;
+			request_data.phoneNumber = registerParams.phoneNumber;
+			request_data.password = registerParams.password;
+			return $http({
+				method: "POST",
+				url: "http://localhost:10101/user/register",
+				data: JSON.stringify(request_data),
+				headers: {"Content-Type": "application/x-www-form-urlencoded"}
+			});
 		}
 	}
 });

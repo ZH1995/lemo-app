@@ -3,26 +3,23 @@ angular.module('register-controller',[])
     $scope.formUser = {};
 
     $scope.doRegister = function(){
-        console.log($scope.formUser);
-        $scope.showSuccessMesPopup("正在注册，请稍后");
-        $timeout(function() {
-            $scope.showErrorMesPopup("注册成功！");
-            $state.go("login");
-        }, 2000);
-        // TODO: 服务端还没写，所以这里先注释掉，默认输入合法即跳转
-        /*
-        RegisterService.register($scope.formUser).success(function(data){
-            if(data != null){
+
+        if ($scope.formUser.password != $scope.formUser.rePassword) {
+            $scope.showErrorMesPopup("密码不一致，请重新输入");
+            return ;
+        }
+        RegisterService.register($scope.formUser).success(function(obj){
+            if(obj.errno == 0){
                 $scope.showSuccessMesPopup("正在注册，请稍后");
                 $timeout(function() {
+                    // TODO: 打算把用户ID存入Session
                     $scope.showErrorMesPopup("注册成功！");
-                    $state.go("login");
+                    $state.go("tab.message");
                 }, 2000);
             }else{
-                $scope.showErrorMesPopup("用户名已被注册，请更换！");
+                $scope.showErrorMesPopup("账号已被注册，请更换！");
             }
         });
-        */
     };
 
 

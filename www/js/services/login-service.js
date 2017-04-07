@@ -4,7 +4,7 @@ angular.module('login-service', [])
 	return {
 		login: function(formUser) {
 			var request_data = new Object();
-			request_data.username = formUser.phoneNumber;
+			request_data.phoneNumber = formUser.phoneNumber;
 			request_data.password = formUser.password;
 			return $http({
 				method: "POST",
