@@ -60,22 +60,12 @@ angular.module('lemo', ['ionic', 'lemo.controllers', 'lemo.services', 'lemo.filt
     }
   })
 
-  .state('tab.message-detail', {
+  .state('messageDetail', {
       url: '/message/:messageId',
-      views: {
-        'tab-message': {
-          templateUrl: 'templates/message-detail.html',
-          controller: 'MessageDetailCtrl'
-        }
-      }
-    })
-   /*
-  .state('message-detail', {
-      url: '/message/:messageId',
-      templateUrl: 'templates/message-detail.html',
+      templateUrl: 'templates/messageDetail.html',
       controller: 'MessageDetailCtrl'
     })
-    */
+
   .state('tab.media', {
       url: '/media',
       views: {
