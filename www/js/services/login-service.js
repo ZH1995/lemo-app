@@ -1,15 +1,19 @@
+/**
+ * Created by lemo on 17-4-17.
+ */
 angular.module('login-service', [])
 .factory('LoginService', function($http){
 
 	return {
-		login: function(formUser) {
-			var request_data = new Object();
-			request_data.phoneNumber = formUser.phoneNumber;
-			request_data.password = formUser.password;
-			return $http({
+		login: function(phoneNumber, password) {
+			var requestData = {
+        "phoneNumber": phoneNumber,
+        "password": password
+      };
+		  return $http({
 				method: "POST",
 				url: "http://localhost:10101/user/login",
-				data: JSON.stringify(request_data),
+				data: JSON.stringify(requestData),
 				headers: {"Content-Type": "application/x-www-form-urlencoded"}
 			});
 		}

@@ -1,15 +1,23 @@
 /**
  * Created by lemo on 17-4-12.
  */
-angular.module('commentList-controller',[])
-.controller('CommentListCtrl', ['$scope', '$stateParams', '$timeout', 'CommentListService', function($scope, $stateParams, $timeout, CommentListService){
+angular.module('messageList-controller',[])
+.controller('MessageListCtrl', ['$scope', '$stateParams', '$timeout', 'MessageListService', function($scope, $stateParams, $timeout, MessageListService){
 
   $scope.userInfo = JSON.parse(sessionStorage.getItem("user"));
-  $scope.messageId = $stateParams.messageId;
+
+  // 设置页面标题和tagId值
+  if ($stateParams.listTitle == null) {
+    $scope.listTitle = "热点新闻";
+    $scope.tagId = 1001;
+  } else {
+    $scope.listTitle = $stateParams.listTitle;
+    $scope.tagId = $stateParams.tagId;
+  }
 
   // 初始化变量
   $scope.isHaveMoreData = true;
-  $scope.commentList = [];
+  $scope.messageList = [];
 	$scope.pagination = {
 		pageSize: 7,
 		currentPage: 0
@@ -17,15 +25,14 @@ angular.module('commentList-controller',[])
 
 	// 加载更多
 	$scope.loadMore = function() {
-
-		CommentListService.getCommentList($scope.userInfo.uid, $scope.messageId,
+		MessageListService.getMessageList($scope.userInfo.uid, $scope.tagId,
                                       $scope.pagination.pageSize, $scope.pagination.currentPage++)
 		.success(function(obj){
 			if (obj.errno != 0 || obj.data.list.length == 0) {
         $scope.isHaveMoreData = false;
         return;
       }
-			$scope.commentList = $scope.commentList.concat(obj.data.list);
+			$scope.messageList = $scope.messageList.concat(obj.data.list);
 		})
 		.finally(function(){
 			$timeout(function(){
@@ -37,7 +44,7 @@ angular.module('commentList-controller',[])
 
 	// 下拉刷新
 	$scope.doRefresh = function () {
-		$scope.commentList = [];
+		$scope.messageList = [];
 		$scope.pagination = {
 			pageSize: 7,
 			currentPage: 0
@@ -46,9 +53,7 @@ angular.module('commentList-controller',[])
   };
 
 	$scope.$on("stateChangeSuccess", function(){
-	  console.log("state change");
 		$scope.loadMore();
 	});
-
 
 }]);

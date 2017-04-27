@@ -3,15 +3,14 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('lemo', ['ionic', 'lemo.controllers', 'lemo.services', 'lemo.filters'])
+// 'starter.controllers' is found in controllers_bk.js
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+    if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
 
@@ -24,7 +23,6 @@ angular.module('lemo', ['ionic', 'lemo.controllers', 'lemo.services', 'lemo.filt
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-
   //使用$ionicConfigProvider服务解决ionic项目生成的导航栏在手机顶部的问题
   $ionicConfigProvider.platform.ios.tabs.style('standard');
   $ionicConfigProvider.platform.ios.tabs.position('bottom');
@@ -34,60 +32,79 @@ angular.module('lemo', ['ionic', 'lemo.controllers', 'lemo.services', 'lemo.filt
   $ionicConfigProvider.platform.ios.navBar.alignTitle('center');
   $ionicConfigProvider.platform.android.navBar.alignTitle('left');
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
-  // 使用$stateProvider中的state()方法来进行路由的配置，这是ionic种的路由实现机制
   $stateProvider
 
-  // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html'
-  })
-
-  // Each tab has its own nav history stack:
-
-  .state('tab.message', {
-    url: '/message',
-    views: {
-      'tab-message': {
-        templateUrl: 'templates/tab-message.html',
-        controller: 'MessageCtrl'
-      }
-    }
-  })
-
-  .state('messageDetail', {
-      url: '/message/:messageId',
-      templateUrl: 'templates/messageDetail.html',
-      controller: 'MessageDetailCtrl'
+    .state('app', {
+      url: '/app',
+      cache: false,
+      abstract: true,
+      templateUrl: 'templates/menu.html',
+      controller: 'MenuCtrl'
     })
 
-  .state('commentList', {
-      url: '/commentList/:commentId',
-      templateUrl: 'templates/commentList.html',
-      controller: 'CommentListCtrl'
-    })
-
-  .state('tab.media', {
-      url: '/media',
+    .state('app.messageList', {
+      url: '/messageList/:listTitle/:tagId',
+      cache: false,
       views: {
-        'tab-media': {
-          templateUrl: 'templates/tab-media.html',
-          controller: 'MediaCtrl'
+        'menuContent': {
+          templateUrl: 'templates/messageList.html',
+          controller: 'MessageListCtrl'
         }
       }
     })
 
-  .state('tab.personal', {
-    url: '/personal',
+
+  .state('app.messageDetail', {
+    url: '/messageDetail/:messageId',
+    cache: false,
     views: {
-      'tab-personal': {
-        templateUrl: 'templates/tab-personal.html',
-        controller: 'PersonalCtrl'
+      'menuContent': {
+        templateUrl: 'templates/messageDetail.html',
+        controller: 'MessageDetailCtrl'
+      }
+    }
+  })
+
+  .state('app.collectionList', {
+    url: '/collectionList',
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/collectionList.html',
+        controller: 'CollectionListCtrl'
+      }
+    }
+  })
+
+  .state('app.modifyUserInfo', {
+    url: '/modifyUserInfo',
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/modifyUserInfo.html',
+        controller: 'ModifyUserInfoCtrl'
+      }
+    }
+  })
+
+  .state('app.newList', {
+    url: '/newList',
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/newList.html',
+        controller: 'NewListCtrl'
+      }
+    }
+  })
+
+  .state('app.writeComment', {
+    url: '/writeComment/:messageId/:replyUid/:replyName',
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/writeComment.html',
+        controller: 'WriteCommentCtrl'
       }
     }
   })
@@ -104,12 +121,17 @@ angular.module('lemo', ['ionic', 'lemo.controllers', 'lemo.services', 'lemo.filt
       controller:'RegisterCtrl'
   })
 
-  .state('modifyPassword',{
-      url:'/modifyPassword',
-      templateUrl:'templates/modifyPassword.html',
-      controller:'ModifyPasswordCtrl'
-  });
+  .state('app.commentList', {
+    url: '/commentList/:messageId',
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/commentList.html',
+        controller: 'CommentListCtrl'
+      }
+    }
 
+  });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
 });

@@ -1,36 +1,42 @@
-<ion-view title="文章">
-    <ion-content>
-        <div class="padding">
-        	<img class="full-image" src="{{messageDetail.cover_pic}}"/>
-        	
-        	<div>
-        		<h3 class="text-center">{{messageDetail.message_title}}</h3>
-        	</div>
+<ion-view view-title="资讯内容">
+  <ion-content>
 
-        	<div class="item item-avatar">
-			    <img src="{{messageDetail.author_img}}" style="width:80px; height:80px"></img>
-			    <h2>{{messageDetail.author_name}}</h2>
-			    <p>{{messageDetail.create_time | UnixTimeFilter}}</p>
-			</div>
+      <div class="list card">
 
-			<div class="item item-body">
-				<pre>{{messageDetail.message_content}}</pre>
-			</div>
+      <div>
+        <h3 class="text-center">{{messageDetail.messageTitle}}</h3>
+      </div>
 
-            <div class="item item-divider"></div>
-        </div>
-    </ion-content>
+      <div class="item item-avatar">
+        <img src="{{ messageDetail.authorHeadImg }}">
+        <h2>{{ messageDetail.authorName }}</h2>
+        <p>{{ messageDetail.createTime }}</p>
+      </div>
 
-    <div class="tabs">
-      <a class="tab-item">
-        <i class="icon ion-chevron-left" ng-click="goBack()"></i>
-      </a>
-      <a class="tab-item">
-        <i class="icon ion-thumbsup"></i>
-      </a>
-      <a class="tab-item" href="#/commentList/1">
-        <i class="icon ion-ios-chatboxes-outline"></i>
-      </a>
+      <div class="item item-body">
+        <img ng-show="messageDetail.coverPic != ''" class="full-image" src="{{ messageDetail.coverPic }}">
+        <pre>{{ messageDetail.messageContent }}</pre>
+      </div>
+
     </div>
+  </ion-content>
 
+  <ion-footer-bar class="bar-stable">
+      <div class="tabs tabs-icon-only">
+          <a class="tab-item" ng-click="thumbsUp()">
+            <i class="icon ion-thumbsup" style="position: relative;">
+                <span class="badge {{ thumbsUpColor }}">{{ messageDetail.goodNum }}</span>
+            </i>
+          </a>
+          <a class="tab-item" ng-click="collectMessage()">
+            <i class="icon {{ collectIcon }}" style="position: relative;">
+            </i>
+          </a>
+          <a class="tab-item" href="#/app/commentList/{{messageId}}">
+            <i class="icon ion-ios-chatboxes-outline" style="position: relative;">
+                <span ng-show="messageDetail.commentNum != 0" class="badge badge-positive">{{ messageDetail.commentNum }}</span>
+            </i>
+          </a>
+        </div>
+    </ion-footer-bar>
 </ion-view>

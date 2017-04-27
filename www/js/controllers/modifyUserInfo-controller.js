@@ -1,19 +1,25 @@
 /**
  * Created by lemo on 17-4-17.
  */
-angular.module('login-controller',[])
-.controller('LoginCtrl', ['$scope', '$ionicPopup', '$timeout', '$state', 'LoginService', function($scope, $ionicPopup, $timeout, $state, LoginService){
+angular.module('modifyUserInfo-controller',[])
+.controller('ModifyUserInfoCtrl', ['$scope', '$ionicPopup', '$timeout', '$state', '$ionicHistory', 'ModifyUserInfoService', function($scope, $ionicPopup, $timeout, $state, $ionicHistory, ModifyUserInfoService){
+  $scope.formUser = {};
+  $scope.userInfo = JSON.parse(sessionStorage.getItem("user"));
+	$scope.doSubmit = function(){
+	      var headImg = "";
+	      if ($scope.formUser.choice === 1) {
+	        headImg = $scope.userInfo.headImg;
+        }
 
-	$scope.formUser = {};
-
-	$scope.doLogin = function(){
-        LoginService.login(this.formUser.phoneNumber, this.formUser.password).success(function (obj) {
+        ModifyUserInfoService.modifyUserInfo($scope.userInfo.uid, $scope.formUser.userName, $scope.formUser.userSign, headImg).success(function (obj) {
             if (obj.errno != 0) {
-                $scope.showErrorMesPopup("手机号或密码错误");
+                $scope.showErrorMesPopup("修改信息失败");
                 return -1;
             }
-            $scope.showSuccessMesPopup("正在登录请稍后");
+            sessionStorage.removeItem("user");
+            $scope.userInfo = obj.data;
             sessionStorage.setItem("user", JSON.stringify(obj.data));
+            $scope.showSuccessMesPopup("修改信息成功");
         }).error(function (obj) {
             $scope.showErrorMesPopup("网络错误，请保持网络畅通");
         });
@@ -35,7 +41,7 @@ angular.module('login-controller',[])
         });
         $timeout(function() {
             myPopup.close(); // 2秒后关闭
-            $state.go("app.messageList",{listTitle: '热点新闻', tagId:1001});
+            $state.go("login");
         }, 2000);
     };
 }]);

@@ -3,7 +3,7 @@
 		<div class="text-center" style="margin-top: 40px;">
 			<h3>自媒体日报</h3>
 		</div>
-		
+
 		<div style="margin-top: 120px;">
             <form name="myForm" novalidate>
                 <div class="list list-inset">
@@ -26,7 +26,7 @@
 
                     <input  class="button  button-block button-small button-positive" type="submit" ng-disabled="myForm.$invalid" ng-click="doLogin()" value="登录"/>
 
-                    <div class="button button-block button-small" style="background-color: peru;color:white" ui-sref="tab.message">我是游客，随便逛逛</div>
+                    <div class="button button-block button-small" style="background-color: peru;color:white" ui-sref="app.messageList({listTitle: '热点新闻', tagId:1001})">我是游客，随便逛逛</div>
                     <div class="row">
                         <div class="col button button-clear button-positive" ui-sref="register">注册帐号</div>
                         <div class="col button button-light" ui-sref="modifyPassword">忘记密码</div>

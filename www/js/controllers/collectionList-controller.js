@@ -1,15 +1,13 @@
 /**
  * Created by lemo on 17-4-12.
  */
-angular.module('commentList-controller',[])
-.controller('CommentListCtrl', ['$scope', '$stateParams', '$timeout', 'CommentListService', function($scope, $stateParams, $timeout, CommentListService){
+angular.module('collectionList-controller',[])
+.controller('CollectionListCtrl', ['$scope', '$stateParams', '$timeout','CollectionListService', function($scope, $stateParams, $timeout, CollectionListService){
 
   $scope.userInfo = JSON.parse(sessionStorage.getItem("user"));
-  $scope.messageId = $stateParams.messageId;
-
   // 初始化变量
   $scope.isHaveMoreData = true;
-  $scope.commentList = [];
+  $scope.collectionList = [];
 	$scope.pagination = {
 		pageSize: 7,
 		currentPage: 0
@@ -18,14 +16,15 @@ angular.module('commentList-controller',[])
 	// 加载更多
 	$scope.loadMore = function() {
 
-		CommentListService.getCommentList($scope.userInfo.uid, $scope.messageId,
-                                      $scope.pagination.pageSize, $scope.pagination.currentPage++)
+    var collectAction = 2;
+		CollectionListService.getCollectionList($scope.userInfo.uid, collectAction, $scope.pagination.pageSize,
+                                            $scope.pagination.currentPage++)
 		.success(function(obj){
 			if (obj.errno != 0 || obj.data.list.length == 0) {
         $scope.isHaveMoreData = false;
         return;
       }
-			$scope.commentList = $scope.commentList.concat(obj.data.list);
+			$scope.collectionList = $scope.collectionList.concat(obj.data.list);
 		})
 		.finally(function(){
 			$timeout(function(){
@@ -37,7 +36,7 @@ angular.module('commentList-controller',[])
 
 	// 下拉刷新
 	$scope.doRefresh = function () {
-		$scope.commentList = [];
+		$scope.collectionList = [];
 		$scope.pagination = {
 			pageSize: 7,
 			currentPage: 0
@@ -46,7 +45,6 @@ angular.module('commentList-controller',[])
   };
 
 	$scope.$on("stateChangeSuccess", function(){
-	  console.log("state change");
 		$scope.loadMore();
 	});
 
