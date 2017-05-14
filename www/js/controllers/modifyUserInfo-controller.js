@@ -3,11 +3,16 @@
  */
 angular.module('modifyUserInfo-controller',[])
 .controller('ModifyUserInfoCtrl', ['$scope', '$ionicPopup', '$timeout', '$state', '$ionicHistory', 'ModifyUserInfoService', function($scope, $ionicPopup, $timeout, $state, $ionicHistory, ModifyUserInfoService){
-  $scope.formUser = {};
   $scope.userInfo = JSON.parse(sessionStorage.getItem("user"));
-	$scope.doSubmit = function(){
-	      var headImg = "";
-	      if ($scope.formUser.choice === 1) {
+  $scope.formUser = {
+      "userName": $scope.userInfo["uname"],
+      "userSign": $scope.userInfo["userSign"],
+      "choice": "0"
+  };
+
+  $scope.doSubmit = function(){
+	    var headImg = "";
+	    if ($scope.formUser.choice === 1) {
 	        headImg = $scope.userInfo.headImg;
         }
 

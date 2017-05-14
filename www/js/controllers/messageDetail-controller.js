@@ -32,8 +32,6 @@ angular.module('messageDetail-controller',[])
   });
 
   // 处理点赞
-
-
   $scope.thumbsUp = function () {
     if ($scope.hasGood === true) {
       $scope.messageDetail["goodNum"] --;
@@ -53,7 +51,6 @@ angular.module('messageDetail-controller',[])
   };
 
   // 处理收藏
-
   $scope.collectMessage = function () {
     if ($scope.hasCollect === true) {
       $scope.hasCollect = false;

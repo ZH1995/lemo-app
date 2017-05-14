@@ -15,7 +15,7 @@
 
                 <div class="item item-input">
                     <i class="icon ion-ios-person positive"></i>
-                    <input type="text" placeholder="输入用户名" name="username"
+                    <input type="text" placeholder="输入用户名(2-9个字符)" name="username"
                            ng-minlength="2" ng-maxlength="9" ng-pattern="/^\w{2,9}$/" ng-model="formUser.username" required>
                     <i class="icon ion-close-circled assertive" ng-show="myForm.username.$dirty && myForm.username.$invalid"></i>
                     <i class="icon ion-checkmark-circled balanced" ng-show="myForm.username.$dirty && myForm.username.$valid"></i>
@@ -24,7 +24,7 @@
 
                 <div class="item item-input">
                     <i class="icon ion-ios-unlocked positive"></i>
-                    <input type="password" placeholder="6-32位字母数字组合" name="password" ng-minlength="6" ng-maxlength="32" ng-model="formUser.password" required>
+                    <input type="password" placeholder="6-12位字母数字组合" name="password" ng-minlength="6" ng-maxlength="12" ng-model="formUser.password" required>
                     <i class="icon ion-close-circled assertive" ng-show="myForm.password.$dirty && myForm.password.$invalid"></i>
                     <i class="icon ion-checkmark-circled balanced" ng-show="myForm.password.$dirty && myForm.password.$valid"></i>
                 </div>
