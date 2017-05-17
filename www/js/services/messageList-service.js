@@ -11,7 +11,7 @@ angular.module('messageList-service', [])
                 "pageSize": pageSize,
                 "currentPage": currentPage
             };
-			if (tagId === 1001) {
+			if (tagId === "1001") {
 				return $http({
                     method: "POST",
                     url: "http://localhost:10101/message/hotspot",

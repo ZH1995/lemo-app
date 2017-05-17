@@ -7,7 +7,7 @@ angular.module('writeComment-controller',[])
   $scope.userInfo = JSON.parse(sessionStorage.getItem("user"));
   $scope.replyUid = $stateParams.replyUid;
   $scope.messageId = $stateParams.messageId;
-  if ($scope.replyUid === 0) {
+  if ($scope.replyUid === 0 || $stateParams.replyName === "空") {
     $scope.writeTitle = "写评论";
   } else {
     $scope.writeTitle = "回复" + $stateParams.replyName;
