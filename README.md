@@ -12,18 +12,11 @@
 
 # 页面截图
 
-![登录页](http://i1.piimg.com/1949/c12a631521e58cce.png)
+![登录页](http://i1.piimg.com/1949/c12a631521e58cce.png) ![注册页](http://i1.piimg.com/1949/f351039b7e3a4978.png)
 
-![注册页](http://i1.piimg.com/1949/f351039b7e3a4978.png)
+![文章列表页](http://i1.piimg.com/1949/2492857ca1d32390.png) ![菜单页](http://i1.piimg.com/1949/07d71e5c08cc82cb.png)
 
-![文章列表页](http://i1.piimg.com/1949/2492857ca1d32390.png)
+![修改信息页](http://i4.buimg.com/1949/a91fc73879416408.png) ![文章内容页](http://i1.piimg.com/1949/ca1005ac9d3cc9c5.png)
 
-![菜单页](http://i1.piimg.com/1949/07d71e5c08cc82cb.png)
+![评论列表页](http://i1.piimg.com/1949/6c7ab5b506325877.png) ![写评论页](http://i1.piimg.com/1949/a34d2940449ee01e.png)
 
-![修改信息页](http://i1.piimg.com/1949/07d71e5c08cc82cb.png)
-
-![文章内容页](http://i1.piimg.com/1949/07d71e5c08cc82cb.png)
-
-![评论列表页](http://i1.piimg.com/1949/07d71e5c08cc82cb.png)
-
-![写评论页](http://i1.piimg.com/1949/07d71e5c08cc82cb.png)
